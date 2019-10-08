@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>make deck</title>
+</head>
+<body>
+{% if msg %} {{ msg }} {% endif %}
+<a href="/make/cypher">Make more cypher</a> <br>
+<a href="/make/deck">Add a Deck</a> <br>
+<a href="/">Go Home</a>
+<form method="post" action="fill">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Save</button>
+</form>
+{% for deck in decks %}
+    {{ deck.id }} <br>
+    {{ deck.name }} <br>
+    ______________________________<br>
+{% endfor %}
+</body>
+</html>
