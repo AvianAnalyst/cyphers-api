@@ -3,21 +3,17 @@ from django.db import models
 
 # Create your models here.
 class Cypher(models.Model):
-    D = 'd%'
     D4 = 'd1'
-    D6 = 'd1'
-    D8 = 'd1'
-    D10 = 'd1'
-    D12 = 'd1'
-    D20 = 'd1'
-    DICE_TYPE= [
+    D6 = 'd2'
+    D8 = 'd3'
+    D10 = 'd4'
+    D12 = 'd5'
+    DICE_TYPE = [
         (D4, 'd4'),
         (D6, 'd6'),
         (D8, 'd8'),
         (D10, 'd10'),
         (D12, 'd12'),
-        (D20, 'd20'),
-        (D, 'Percentile'),
     ]
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=250)
@@ -34,12 +30,7 @@ class Cypher(models.Model):
 
 class Deck(models.Model):
     name = models.CharField(max_length=100)
+    cyphers = models.ManyToManyField(Cypher, related_name='decks')
 
     def __str__(self):
         return self.name
-
-
-class DeckCypher(models.Model):
-    deck_id = models.ForeignKey(Deck, on_delete=models.CASCADE)
-    cypher_id = models.ForeignKey(Cypher, on_delete=models.CASCADE)
-
